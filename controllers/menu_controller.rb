@@ -9,7 +9,8 @@
 
    def main_menu
      puts "Main Menu - #{@address_book.entries.count} entries"
-     puts "1 - View all entries"
+     puts "0 - View by entry number"     
+     puts "1 - View all entries"      
      puts "2 - Create an entry"
      puts "3 - Search for an entry"
      puts "4 - Import entries from a CSV"
@@ -20,6 +21,10 @@
      puts "You picked #{selection}"
  # #7
      case selection
+     when 0
+       system "clear"
+       view_entry
+       main_menu  
      when 1
        system "clear"
        view_all_entries
@@ -47,7 +52,22 @@
        main_menu
      end
    end
- 
+   def view_entry
+    print "Entry number: "
+    entry_number = gets.chomp.to_i
+
+    if @address_book.entries.length >= entry_number - 1
+      entry = @address_book.entries[entry_number - 1]
+      puts entry.to_s
+     elsif entry_number == "exit"
+       main_menu
+     else
+       puts "#{entry_number} does not exist.  Try again or type exit to return to the main menu."
+       view_entry
+     end
+  end
+
+
  # #10
    def view_all_entries
  # #14
@@ -91,8 +111,9 @@
  # #16
      puts "n - next entry"
      puts "d - delete entry"
-     puts "e - edit this entry"
+     puts "e - edit this entry"    
      puts "m - return to main menu"
+
  
  # #17
      selection = gets.chomp
