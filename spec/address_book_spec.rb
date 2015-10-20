@@ -110,4 +110,34 @@
      end
 
    end
- end
+
+   context 'when importing from entries2.csv' do
+   	it "imports the correct number of entries" do
+       book.import_from_csv("entries2.csv")
+       book_size = book.entries.size
+
+       # Check the size of the AddressBook.entries
+       expect(book_size).to eql 2
+     end  	
+
+    it "imports the 1st entry" do
+       book.import_from_csv("entries2.csv")
+       # Check the first entry
+       entry_one = book.entries[0]
+       check_entry(entry_one, "Byron","555-555-3416","byron@blocmail.com")
+       # expect(entry_one.name).to eql "Bill"
+       # expect(entry_one.phone_number).to eql "555-555-4854"
+       # expect(entry_one.email).to eql "bill@blocmail.com"
+     end
+
+     it "imports the 2nd entry" do
+       book.import_from_csv("entries2.csv")
+       # Check the second entry
+       entry_two = book.entries[1]
+       check_entry(entry_two, "Ernie","555-555-5672","ernie@blocmail.com")
+       # expect(entry_two.name).to eql "Bob"
+       # expect(entry_two.phone_number).to eql "555-555-5415"
+       # expect(entry_two.email).to eql "bob@blocmail.com"
+     end  
+  end
+end
