@@ -3,8 +3,7 @@
   require "csv"
  
  class AddressBook
-   attr_accessor :entries
-
+   attr_accessor :entries, :source
    def initialize
      @entries = []
    end
@@ -24,6 +23,7 @@
    end
 
    def import_from_csv(file_name)
+     @source = file_name
      csv_text = File.read(file_name)
      csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
  # #8
